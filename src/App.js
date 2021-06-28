@@ -1,6 +1,6 @@
 import './App.css'
 import Button from 'react-bootstrap/Button'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Unmount from './Unmount'
 
@@ -65,6 +65,7 @@ function App() {
   useEffect(() => {
     console.log('componentDidMount')
   }, [])
+  // this is mimicking a componentDidMount
 
   useEffect(() => {
     return () => {
@@ -72,6 +73,27 @@ function App() {
     }
   }, [])
   // this is mimicking a componentWillUnmount
+
+  // useMemo
+  // useCallback
+  // these are for PERFORMANCE reasons
+
+  const complexObj = {
+    name: 'Stefano',
+    country: 'Italy',
+    age: 34,
+    roles: ['tutor', 'dev', 'staff'],
+  }
+
+  const complexObjMemoized = useMemo(
+    () => ({
+      name: obj.name,
+      country: 'Italy',
+      age: 34,
+      roles: ['tutor', 'dev', 'staff'],
+    }),
+    [obj.name]
+  )
 
   return (
     <div className="App">
